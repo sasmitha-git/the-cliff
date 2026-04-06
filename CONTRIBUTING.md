@@ -70,6 +70,3 @@ Write clear commit messages:
 
 Open an issue or discussion in the repository.
 
----
-
-**All contributions are welcome and appreciated!** 🙏
