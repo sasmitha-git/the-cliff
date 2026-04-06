@@ -6,6 +6,16 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
+
+export const metadata = {
+  title: "The Cliff",
+  description: "Live streaming platform",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+
 export default function RootLayout({
   children,
 }: {
