@@ -36,9 +36,10 @@
     "**/*.mts",
     "**/*.ts",
     "**/*.tsx"
-, "src/tailwind.config.js"  ],
+  ],
   "exclude": [
     "node_modules",
-    "../server"
+    "../server",
+    "../server/**/*"
   ]
 }
