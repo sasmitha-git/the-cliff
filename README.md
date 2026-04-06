@@ -6,7 +6,7 @@ A live streaming platform I built to learn how real-time video and WebSocket-bas
 ![Home page screenshot](docs/screenshots/2.png)
 ![Home page screenshot](docs/screenshots/3.png)
 ![Home page screenshot](docs/screenshots/4.png)
-![Home page screenshot](docs/screenshots/5.png)![Home page screenshot](docs/screenshots/6.png)
+![Home page screenshot](docs/screenshots/5.png)![Home page screenshot](docs/screenshots/7.png)
 
 ---
 
