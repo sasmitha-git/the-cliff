@@ -3,6 +3,10 @@
 A live streaming platform I built to learn how real-time video and WebSocket-based chat actually work together. Streamers can go live, viewers can watch and chat, and if the connection drops there's a 30-second recovery window before the stream officially ends.
 
 ![Home page screenshot](docs/screenshots/1.png)
+![Home page screenshot](docs/screenshots/1.png)
+![Home page screenshot](docs/screenshots/1.png)
+![Home page screenshot](docs/screenshots/1.png)
+![Home page screenshot](docs/screenshots/1.png)![Home page screenshot](docs/screenshots/1.png)
 
 ---
 
