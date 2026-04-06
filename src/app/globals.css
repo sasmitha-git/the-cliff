@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-syne: "Syne", sans-serif;
+  --font-dm: "DM Sans", sans-serif;
+  --color-cliff-bg: #0e0e10;
+  --color-cliff-surface: #18181b;
+  --color-cliff-border: #2a2a2e;
+  --color-cliff-muted: #1f1f23;
+  --color-cliff-text: #efeff1;
+  --color-cliff-subtle: #adadb8;
+  --color-cliff-faint: #555555;
+  --color-cliff-accent: #c084fc;
+  --color-cliff-live: #dc2626;
+  --color-cliff-green: #69db7c;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-thumb { background: #2a2a2e; border-radius: 4px; }
+}
+
+@layer utilities {
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(192, 132, 252, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(192, 132, 252, 0.5); }
+  }
+  .animate-fadeUp { animation: fadeUp 0.4s ease both; }
+  .animate-shimmer {
+    background: linear-gradient(90deg, #1f1f23 25%, #2a2a2e 50%, #1f1f23 75%);
+    background-size: 400px 100%;
+    animation: shimmer 1.4s ease infinite;
+  }
+  .animate-glow { animation: glow 2s ease-in-out infinite; }
+
+  /* Glass morphism utilities */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .glass-card {
+    background: rgba(24, 24, 27, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(42, 42, 46, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-hover {
+    transition: all 0.3s ease;
+  }
+
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+}
