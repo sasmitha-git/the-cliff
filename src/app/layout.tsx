@@ -8,7 +8,7 @@ import "./globals.css";
 
 
 export const metadata = {
-  title: "The Cliff",
+  title: "The-Cliff",
   description: "Live streaming platform",
   icons: {
     icon: "/favicon.ico",

@@ -62,24 +62,30 @@ A live streaming platform I built to learn how real-time video and WebSocket-bas
 ## Architecture
 
 ```
-Browser (Next.js)
-  │
-  ├── LiveKit WebRTC ──────────────► LiveKit Cloud (video/audio)
-  │                                        ▲
-  ├── REST (fetch) ────────────────► Express API
-  │     cookies / JWT                      │
-  │                                   MongoDB
-  └── Socket.IO ──────────────────► Express + Socket.IO
-        (chat, stream events)         (in-memory chat store)
+Docker Compose Network
+ ┌──────────────────────────────────┐
+ │  Browser (Next.js Container)     │
+ │    │                             │
+ │    ├── LiveKit WebRTC ───────────┼──► LiveKit Cloud
+ │    │                             │
+ │    ├── REST / Socket.IO ─────────┼──► Express Container
+ │    │                             │         │
+ │    └─────────────────────────────┼──► MongoDB Container
+ └──────────────────────────────────┘
 ```
 
 When a stream starts, the backend mints a LiveKit access token and hands it to the client. The client connects directly to LiveKit for video — the Express server never touches the media itself. Chat goes through Socket.IO rooms keyed by `streamId`.
 
 ---
 
-## Getting started
+## 🚀 Quick Start (Docker)
 
-You'll need accounts on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and [LiveKit Cloud](https://cloud.livekit.io) before running locally.
+The fastest way to get the entire ecosystem (Frontend, Backend, and Database) running is using Docker.
+
+1. **Clone the repo:**
+   ```bash
+   git clone [https://github.com/sasmitha-git/the-cliff.git](https://github.com/sasmitha-git/the-cliff.git)
+   cd the-cliff
 
 ### 1. Clone and install
 
