@@ -2,11 +2,16 @@
 
 A live streaming platform I built to learn how real-time video and WebSocket-based chat actually work together. Streamers can go live, viewers can watch and chat, and if the connection drops there's a 30-second recovery window before the stream officially ends.
 
-![Home page screenshot](docs/screenshots/1.png)
-![Home page screenshot](docs/screenshots/2.png)
-![Home page screenshot](docs/screenshots/3.png)
-![Home page screenshot](docs/screenshots/4.png)
-![Home page screenshot](docs/screenshots/5.png)![Home page screenshot](docs/screenshots/7.png)
+---
+
+## 📱 Screenshots
+
+![screenshot 1](docs/screenshots/1.png)
+![screenshot 2](docs/screenshots/2.png)
+![screenshot 3](docs/screenshots/3.png)
+![screenshot 4](docs/screenshots/4.png)
+![screenshot 5](docs/screenshots/5.png)
+![screenshot 6](docs/screenshots/7.png)
 
 ---
 
@@ -20,7 +25,7 @@ A live streaming platform I built to learn how real-time video and WebSocket-bas
 
 ---
 
-## Tech stack
+## Tech Stack
 
 | Layer | What I used |
 |---|---|
@@ -31,31 +36,7 @@ A live streaming platform I built to learn how real-time video and WebSocket-bas
 | Database | MongoDB via Mongoose 9.3 |
 | Auth | JWT (httpOnly cookies) + bcrypt |
 | State | TanStack Query v5 |
-
----
-
-## Project structure
-
-```
-/
-├── client/                  # Next.js frontend
-│   └── src/
-│       ├── app/             # Pages (login, register, home, watch, dashboard)
-│       ├── components/      # Chat, Navbar, StreamCard, ErrorBoundary, etc.
-│       ├── context/         # AuthContext, SocketContext
-│       ├── hooks/           # useAuth, useAuthGuard, useAgeVerification
-│       ├── lib/             # API fetch wrappers, validation helpers
-│       └── types/           # Shared TS interfaces
-│
-└── server/                  # Express backend
-    └── src/
-        ├── config/          # MongoDB connection
-        ├── middleware/       # JWT auth, rate limiter, role checks
-        ├── models/          # User, Stream schemas
-        ├── routes/          # authRoutes, streamRoutes (injected with Socket.IO)
-        ├── services/        # recoveryService — the 30s reconnect grace period logic
-        └── socket/          # socketHandler — chat rooms, message sanitization
-```
+| Containerization | Docker, Docker Compose |
 
 ---
 
@@ -78,29 +59,18 @@ When a stream starts, the backend mints a LiveKit access token and hands it to t
 
 ---
 
-## 🚀 Quick Start (Docker)
+## 🚀 Quick Start (Docker — Recommended)
 
-The fastest way to get the entire ecosystem (Frontend, Backend, and Database) running is using Docker.
+The fastest way to get the entire ecosystem (Frontend, Backend, and Database) running locally.
 
-1. **Clone the repo:**
-   ```bash
-   git clone [https://github.com/sasmitha-git/the-cliff.git](https://github.com/sasmitha-git/the-cliff.git)
-   cd the-cliff
-
-### 1. Clone and install
+### 1. Clone the repo
 
 ```bash
 git clone https://github.com/sasmitha-git/the-cliff.git
 cd the-cliff
-
-# Backend
-cd server && npm install
-
-# Frontend
-cd ../client && npm install
 ```
 
-### 2. Set up environment variables
+### 2. Configure environment variables
 
 **Server** — create `server/.env`:
 
@@ -115,7 +85,7 @@ CLIENT_URL=http://localhost:3000
 NODE_ENV=development
 ```
 
-**Client** — create `client/.env.local`:
+**Frontend** — create `.env.local` in the root:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
@@ -123,9 +93,48 @@ NEXT_PUBLIC_LIVEKIT_URL=wss://your-project.livekit.cloud
 NEXT_PUBLIC_SOCKET_URL=http://localhost:5000
 ```
 
+### 3. Spin up with Docker
 
+```bash
+docker-compose up --build
+```
 
-## The session recovery feature
+The app will be available at **http://localhost:3000**.
+
+---
+
+## 🔧 Manual Setup (Without Docker)
+
+### 1. Install dependencies
+
+```bash
+git clone https://github.com/sasmitha-git/the-cliff.git
+cd the-cliff
+
+# Backend
+cd server && npm install
+
+# Frontend (back to root)
+cd .. && npm install
+```
+
+### 2. Set up environment variables
+
+Same `.env` files as the Docker section above.
+
+### 3. Run both servers
+
+```bash
+# Terminal 1 — Backend
+cd server && npm run dev
+
+# Terminal 2 — Frontend
+npm run dev
+```
+
+---
+
+## The Session Recovery Feature
 
 This was the most interesting thing to build. The problem: WebRTC connections drop for all kinds of reasons (WiFi glitch, laptop lid closes, etc). Without recovery, the stream just dies and viewers see an offline screen.
 
@@ -134,4 +143,3 @@ The fix: when the streamer's connection drops, instead of immediately ending the
 The recovery timeouts live in a `Map<string, NodeJS.Timeout>` in the recovery service. It's in-memory, so a server restart would lose them — good enough for a side project, but something to fix before production.
 
 ---
-
